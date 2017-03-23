@@ -4,22 +4,68 @@ import Foundation
 
 // 1. Создайте пару функций с короткими именами, которые возвращают строку с символом или строкой. Например heart() возвращает сердце и т.п. Вызовите все эти функции внутри принта для вывода строки этих символов путем конкатенации
 
-func hearth() -> Character {
+func heart() -> Character {
     return "❤️"
 }
+
+func brain() -> String {
+    return "brain"
+}
+
+func stomach() -> String {
+    return "stomach"
+}
+
+print(brain() + "\(heart())" + stomach())
 
 // 2. Шахматные клетки.
 // a) Реализовать функцию, которая принимает строку с именем клетки (например, "B5") и возвращает строку “белая” или “черная”. Строку потом распечатайте в консоль
 // b) Реализовать функцию, которая принимает букву и целое значение (координаты клетки) и возвращает строку “белая” или “черная”. Строку потом распечатайте в консоль
 
 func chess1(cell: String) -> String {
-    // ...
+    let white = "белая"
+    let black = "чёрная"
+    let blackCells = ["A1", "A3", "A5", "A7", "B2", "B4", "B6", "B8", "C1", "C3", "C5", "C7", "D2", "D4", "D6", "D8", "E1", "E3", "E5", "E7", "F2", "F4", "F6", "F8", "G1", "G3", "G5", "G7", "H2", "H4", "H6", "H8"]
+    
+    let whiteCells = ["A2", "A4", "A6", "A8", "B1", "B3", "B5", "B7", "C2", "C4", "C6", "C8", "D1", "D3", "D5", "D7"]
+    
+    if blackCells.contains(cell) {
+        return black
+    }else if whiteCells.contains(cell){
+        return white
+    }else {
+        return "введено некорректное значение"
+    }
 }
 
-func chess2(column: Character, row: Int) -> String {
-    // ...
+print(chess1(cell: "D7"))
+
+func chess2(column: Character, row: Int) -> String {//5
+    let white = "белая"
+    let black = "чёрная"
+    let characters: Array<Character>  = ["A", "B", "C", "D", "E", "F", "G", "E"]
+    //если они одинаково четные или одинаково нечетные, тогда черный. иначе - белый
+    let indexOfColumn = characters.index(of: column)
+    let columnInt = indexOfColumn! + 1
+    if  columnInt % 2 > 0 {
+        if row % 2 > 0{
+            return black
+        }else{
+            return white
+        }
+    }else{
+        if row % 2 > 0{
+            return white
+        }else{
+            return black
+        }
+    }
 }
 
+print(chess2(column: "E", row: 2))
+
+
+/*
 // 3. Создайте функцию, которая принимает массив, а возвращает массив в обратном порядке
 // Создайте еще одну, которая принимает последовательность (Range) и возвращает массив элементов последовательности в обратном порядке
 // Чтобы не дублировать код, сделайте так, чтобы функция с последовательностью вызывала первую
@@ -35,3 +81,4 @@ func f3(source: [Int]) -> [Int] {
 func f5(source: String) -> String {
     // ...
 }
+*/
