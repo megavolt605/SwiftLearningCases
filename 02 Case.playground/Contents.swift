@@ -64,18 +64,52 @@ func chess2(column: Character, row: Int) -> String {//5
 
 print(chess2(column: "E", row: 2))
 
-
-/*
 // 3. Создайте функцию, которая принимает массив, а возвращает массив в обратном порядке
 // Создайте еще одну, которая принимает последовательность (Range) и возвращает массив элементов последовательности в обратном порядке
 // Чтобы не дублировать код, сделайте так, чтобы функция с последовательностью вызывала первую
 
 func f3(source: [Int]) -> [Int] {
-    // ...
+    var result: Array <Int> = [];
+    let endIndex = source.endIndex
+    var i = endIndex - 1
+    while i >= 0 {
+        result.append(source[i])
+        i -= 1
+    }
+    return result;
 }
+
+func f31(sourceRange: CountableRange<Int>) -> [Int]{
+    let arrayFromRange = Array(sourceRange)
+    return f3(source: arrayFromRange)
+}
+
+let sourceArray: [Int] = [1,2,3,4,5,6]
+print("sourceArray: \(sourceArray)")
+var resultArray = f3(source: sourceArray)
+print("3.1 resultArray: \(resultArray)")
+resultArray = f31(sourceRange: 3..<6)
+print("3.2 resultArray: \(resultArray)")
+
 
 // 4. Разберитесь с inout самостоятельно и выполните задание номер 3 так, чтобы функция не возвращала перевернутый массив, но меняла элементы в существующем. Что будет если убрать inout?
 
+func f4(array: inout [Int]){
+    var result: Array <Int> = [];
+    let endIndex = array.endIndex
+    var i = endIndex - 1
+    while i >= 0 {
+        result.append(array[i])
+        i -= 1
+    }
+    array = result
+}
+
+var array1 = [10, 20, 30, 40]
+f4(array: &array1)
+print("4 reverse: \(array1)")
+
+/*
 // 5. Создайте функцию, которая принимает строку, убирает из нее все знаки препинания, делает все гласные большими буквами, согласные маленькими, а цифры меняет на соответствующие слова (9 -> nine и тд)
 
 func f5(source: String) -> String {
