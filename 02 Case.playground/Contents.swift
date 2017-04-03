@@ -1,4 +1,4 @@
-/*//: Playground - noun: a place where people can play
+//: Playground - noun: a place where people can play
 
 import Foundation
 
@@ -109,7 +109,6 @@ var array1 = [10, 20, 30, 40]
 f4(array: &array1)
 print("4 reverse: \(array1)")
 
-*/
 
 // 5. Создайте функцию, которая принимает строку, 
 // + убирает из нее все знаки препинания,
