@@ -1,4 +1,4 @@
-//: Playground - noun: a place where people can play
+/*//: Playground - noun: a place where people can play
 
 import Foundation
 
@@ -109,10 +109,45 @@ var array1 = [10, 20, 30, 40]
 f4(array: &array1)
 print("4 reverse: \(array1)")
 
-/*
-// 5. Создайте функцию, которая принимает строку, убирает из нее все знаки препинания, делает все гласные большими буквами, согласные маленькими, а цифры меняет на соответствующие слова (9 -> nine и тд)
+*/
+
+// 5. Создайте функцию, которая принимает строку, 
+// + убирает из нее все знаки препинания,
+// + делает все гласные большими буквами,
+// + согласные маленькими,
+//  а цифры меняет на соответствующие слова (9 -> nine и тд)
+//
 
 func f5(source: String) -> String {
-    // ...
+    let myString = source.lowercased()
+    var resultString = ""
+    let digits = ["0":"zero",
+                  "1":"one",
+                  "2":"two",
+                  "3":"three",
+                  "4":"four",
+                  "5":"five",
+                  "6":"six",
+                  "7":"seven",
+                  "8":"eight",
+                  "9":"nine"]
+    let vowelsArray         = "аеёиоуыэюяeyuioa".characters
+    let consonantsArray     = "бвгджзйклмнпрстфхцчшщъьqwrtpsdfghjklzxcvbnm".characters
+    
+    for charater in myString.characters {
+        if vowelsArray.contains(charater) {
+           let str = String(charater)
+            resultString.append(str.uppercased())
+        }
+        if consonantsArray.contains(charater) {
+            let str = String(charater)
+            resultString.append(str.lowercased())
+        }
+        if digits.keys.contains(String(charater)) {
+            let str = digits[String(charater)]!
+            resultString.append(str)
+        }
+    }
+    return resultString
 }
-*/
+f5(source: "12 HELLO WORLD!")
