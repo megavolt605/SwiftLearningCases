@@ -10,4 +10,7 @@
    <FileRef
       location = "group:03 Case.playground">
    </FileRef>
+   <FileRef
+      location = "group:04 Case.playground">
+   </FileRef>
 </Workspace>
