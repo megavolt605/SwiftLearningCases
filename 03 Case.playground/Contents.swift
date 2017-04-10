@@ -55,10 +55,60 @@ func lifeStage(age: Int){
         print("Incorrect age. Age should be from 0 to 150 years.\n")
     }
 }
-
+print("Life cycle:")
 lifeStage(age: 70)
 
 
 // 3. Напишите функцию, принимающую на вход имя, фамилию и отчество (русские буквы). Если имя начинается с А или О, то верните имя, если же нет, то если отчество начинается на В или Д, то верните имя и отчество, если же опять нет, то в случае если фамилия начинается с Е или З, то верните только фамилию. В противном случае верните полное имя
 
+func fistrLetter(sourceString: String) -> String{
+    return sourceString[sourceString.startIndex..<sourceString.index(sourceString.startIndex, offsetBy: 1)]
+}
+
+func name(firstName: String, lastName: String, surname: String) -> String{
+    var str = fistrLetter(sourceString: firstName)
+    if str == "А" || str == "О" {
+        return firstName
+    } else {
+        str = fistrLetter(sourceString: lastName)
+        if str == "В" || str == "Д" {
+            return firstName + " " + lastName
+        } else {
+            str = fistrLetter(sourceString: surname)
+            if str == "Е" || str == "З"{
+                return surname
+            } else {
+                return firstName + " " + lastName + " " + surname
+            }
+        }
+    }
+}
+
+let nameg = name(firstName: "Светлана", lastName: "Владимировна", surname: "Ежова")
+print(nameg)
+
 // 4. Представьте, что вы играете в морской бои, и у вас осталось некоторое количество кораблей на поле 10Х10 (можно буквы и цифры, а можно только цифры). Вы должны создать свитч, который примет тюпл с координатой и выдаст один из вариантов: мимо, ранил, убил (enum)
+
+enum Result: Int{
+    case Mimo, Ranil, Ubil
+    func toString() -> String{
+        if self == .Mimo {return "Мимо"}
+        if self == .Ranil {return "Ранил"}
+        if self == .Ubil {return "Убил"}
+        return ""
+    }
+}
+
+typealias Shot = (vertical: Int, horizontal: Int)
+let lastShot = Shot(vertical: 2, horizontal: 3)
+
+switch lastShot {
+case (vertical: 2, horizontal: 3):
+    print(Result.Ranil.toString())
+case (vertical: 3, horizontal: 3):
+    print(Result.Ranil.toString())
+case (vertical: 6, horizontal: 6):
+    print(Result.Ubil.toString())
+default:
+    print(Result.Mimo.toString())
+}
