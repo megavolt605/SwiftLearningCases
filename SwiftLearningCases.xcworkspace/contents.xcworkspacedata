@@ -13,4 +13,7 @@
    <FileRef
       location = "group:04 Case.playground">
    </FileRef>
+   <FileRef
+      location = "group:05 Case - DNA.playground">
+   </FileRef>
 </Workspace>
