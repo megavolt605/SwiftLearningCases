@@ -9,6 +9,7 @@ protocol Food {
 
 protocol Storable : Food{
     var expired : Bool { get }
+    var daysToExpire: Int { get }
 }
 
 //
@@ -38,6 +39,8 @@ class Apple : Food {
 
 class Cheese : Storable {
     var name: String = "Cheese"
+    var daysToExpire: Int = 4
+    
     var expired: Bool = true
     func taste() {
         print("Cheese taste")
@@ -46,9 +49,31 @@ class Cheese : Storable {
 
 class Milk : Storable {
     var name: String = "Milk"
+    var daysToExpire: Int = 3
+    
     var expired: Bool = false
     func taste() {
         print("Milk taste")
+    }
+}
+
+class Eggs : Storable {
+    var name: String = "Eggs"
+    var daysToExpire: Int = 7
+    
+    var expired: Bool = false
+    func taste() {
+        print("Eggs taste")
+    }
+}
+
+class Cream : Storable {
+    var name: String = "Cream"
+    var daysToExpire: Int = 7
+    
+    var expired: Bool = false
+    func taste() {
+        print("Cream taste")
     }
 }
 
@@ -64,10 +89,12 @@ let food2 = Tomato()
 let food3 = Apple()
 let food4 = Cheese()
 let food5 = Milk()
-let food6 = SoySauce()
+let food6 = Eggs()
+let food7 = Cream()
+let food8 = SoySauce()
 
 
-let bag: [AnyObject] = [food1, food2, food3, food4, food5, food6]
+let bag: [AnyObject] = [food1, food2, food3, food4, food5, food6, food7, food8]
 
 //func taste1(food: Array<Food>){
 //    for item in food {
@@ -90,7 +117,7 @@ taste(sourceArray: bag)
 //
 //3. Некоторые продукты могут испортиться, если их не положить в холодильник. Создайте новый протокол Storable, он наследуется от протокола Food и содержит еще булевую проперти - expired. У некоторых продуктов замените Food на Storable. Теперь пройдитесь по всем продуктам и, если продукт надо хранить в холодильнике, то перенесите его туда, но только если продукт не испорчен уже, иначе просто избавьтесь от него. Используйте функцию для вывода продуктов для вывода содержимого холодильника
 
-func sortExpiredFood (bag: Array<Any>){
+func sortExpiredFood (bag: Array<Any>) -> Array<Storable>{
     var fridge = [Storable]()
     var freshBag = [Food]()
     for item in bag {
@@ -105,10 +132,24 @@ func sortExpiredFood (bag: Array<Any>){
     }
     print("Fridge contains tastes: ")
     taste(sourceArray: fridge)
+    return fridge
 }
 
-sortExpiredFood(bag: bag)
+var sortedFridge = sortExpiredFood(bag: bag)
+
 //
 //4. Добавьте проперти daysToExpire в протокол Storable. Отсортируйте массив продуктов в холодильнике. Сначала пусть идут те, кто быстрее портятся. Если срок совпадает, то сортируйте по имени.
+
+func sortWithDaysToExpire (fridge: Array<Storable>) -> Array<Storable>{
+    let sortedFridge = fridge.sorted { (s1: Storable, s2: Storable) -> Bool in
+        return s1.daysToExpire == s2.daysToExpire ? s1.name < s2.name : s1.daysToExpire < s2.daysToExpire
+    }
+    return sortedFridge
+}
+
+print("Sorted fridge: ")
+sortedFridge = sortWithDaysToExpire(fridge: sortedFridge)
+taste(sourceArray: sortedFridge)
+
 //
 //5. Не все, что мы кладем в холодильник, является едой. Поэтому сделайте так, чтобы Storable не наследовался от Food. Мы по прежнему приносим еду домой, но некоторые продукты реализуют теперь 2 протокола. Холодильник принимает только те продукты, которые еще и Storable. функция сортировки должна по прежнему работать.
